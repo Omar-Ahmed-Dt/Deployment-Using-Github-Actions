@@ -37,8 +37,8 @@ jobs:
         run: docker pull omar9289/swiggy-clone:latest
       - name: Image scan
         run: trivy image omar9289/swiggy-clone:latest > trivyimagedeploy.txt
-      - name: Deploy to container
-        run: docker run -d --name swiggy-clone1 -p 3000:3000 omar9289/swiggy-clone:latest
+      # - name: Deploy to container
+      #   run: docker run -d --name swiggy-clone1 -p 3000:3000 omar9289/swiggy-clone:latest
       - name: Update kubeconfig
         run: aws eks --region eu-central-1 update-kubeconfig --name demo
       - name: Deploy to kubernetes

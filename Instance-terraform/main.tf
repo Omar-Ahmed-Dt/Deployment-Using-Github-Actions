@@ -48,7 +48,7 @@ data "aws_ami" "selected" {
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.selected.id
   instance_type          = "t2.medium"
-  key_name               = "DT"
+  key_name               = "DT_F"
   vpc_security_group_ids = [aws_security_group.my-ec2.id]
   user_data              = templatefile("./script.sh", {})
 

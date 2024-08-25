@@ -27,19 +27,16 @@ cd deployment-using-github-actions/Eks-terraform
 terraform init
 terraform apply
 ```
-
 ## Step 6 
-build and push docker image and Deployment on kubernetes
-![dockerhub](./imgs/dockerhub.png)
-![eks](./imgs/eks.png)
-![swiggy](./imgs/swiggy.png)
-## Step 7
-commit the changes and this will deploy the image locally on the base server
+commit the changes and this will deploy the image on EKS
 ![jobs](./imgs/jobs.png)
 ![actions](./imgs/actions.png)
 ![sonar](./imgs/sonar.png)
+![dockerhub](./imgs/dockerhub.png)
+![eks](./imgs/eks.png)
+![swiggy](./imgs/swiggy.png)
 
-## Step 8
+## Step 7
 [Using this repo to Monitering via Prmotheus and grafana](https://github.com/Omar-Ahmed-Dt/Monitoring_AWS_EKS_using_Prometheus_and_Grafana)
 
 ![mn](./imgs/mn.png)

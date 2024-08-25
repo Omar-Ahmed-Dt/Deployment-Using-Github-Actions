@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+
+env:
+  DOCKER_IMAGE: omar9289/swiggy-clone:latest
+
 jobs:
   build:
     name: Build
@@ -17,28 +21,29 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       - name: NPM Install
-        run: | 
+        run: |
           sudo apt install nodejs npm -y
           npm install
       - name: Docker build and push
         run: |
           # Run commands to build and push Docker images
           docker build -t swiggy-clone .
-          docker tag swiggy-clone omar9289/swiggy-clone:latest
+          docker tag swiggy-clone $DOCKER_IMAGE
           docker login -u ${{ secrets.Dockerhub_username }} -p ${{ secrets.Dockerhub_token }}
-          docker push omar9289/swiggy-clone:latest
+          docker push $DOCKER_IMAGE
         env:
           DOCKER_CLI_ACI: 1
+
   deploy:
-   needs: build
-   runs-on: [self-hosted]
-   steps:
+    needs: build
+    runs-on: [self-hosted]
+    steps:
       - name: docker pull image
-        run: docker pull omar9289/swiggy-clone:latest
+        run: docker pull $DOCKER_IMAGE
       - name: Image scan
-        run: trivy image omar9289/swiggy-clone:latest > trivyimagedeploy.txt
+        run: trivy image $DOCKER_IMAGE > trivyimagedeploy.txt
       # - name: Deploy to container
-      #   run: docker run -d --name swiggy-clone1 -p 3000:3000 omar9289/swiggy-clone:latest
+      #   run: docker run -d --name swiggy-clone1 -p 3000:3000 $DOCKER_IMAGE
       - name: Update kubeconfig
         run: aws eks --region eu-central-1 update-kubeconfig --name demo
       - name: Deploy to kubernetes

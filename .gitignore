@@ -26,3 +26,5 @@ yarn-error.log*
 /Instance-terraform/.terraform*
 /Eks-terraform/terraform.*
 /Eks-terraform/.terraform*
+/Monitoring/terraform.*
+/Monitoring/.terraform*

@@ -21,9 +21,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       - name: NPM Install
-        run: |
-          sudo apt install nodejs npm -y
-          npm install
+        run: npm install
       - name: Docker build and push
         run: |
           # Run commands to build and push Docker images
